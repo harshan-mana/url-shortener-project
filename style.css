@@ -9,7 +9,6 @@ body {
     color: #333;
 }
 
-/* The White Box */
 .container {
     background: #ffffff;
     padding: 30px;
@@ -25,14 +24,13 @@ h1 {
     color: #4a4a4a;
 }
 
-/* Input and Button Styling */
 input {
     width: 100%;
     padding: 12px;
     margin: 15px 0;
     border: 2px solid #ddd;
     border-radius: 8px;
-    box-sizing: border-box; /* Keeps padding inside the width */
+    box-sizing: border-box;
 }
 
 button {
@@ -52,7 +50,6 @@ button:hover {
     background-color: #5a67d8;
 }
 
-/* The Result Box */
 .result-box {
     margin-top: 25px;
     padding: 15px;
@@ -61,9 +58,22 @@ button:hover {
     border-radius: 8px;
 }
 
-#shortLink {
+#shortLinksList {
+    list-style: none;
+    padding: 0;
+}
+
+#shortLinksList li {
+    margin: 10px 0;
+}
+
+#shortLinksList a {
     color: #764ba2;
     font-weight: bold;
     text-decoration: none;
     word-break: break-all;
+}
+
+#shortLinksList a:hover {
+    text-decoration: underline;
 }
