@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickLink | URL Shortener</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
@@ -14,7 +16,13 @@
     <p>Paste your long link below to generate multiple short links.</p>
 
     <div class="input-group">
-        <input type="text" id="longUrl" placeholder="https://example.com/very-long-link">
+        <input 
+            type="url"
+            id="longUrl"
+            placeholder="https://example.com/very-long-link"
+            required
+        >
+
         <button onclick="shortenUrl()">Shorten</button>
     </div>
 
