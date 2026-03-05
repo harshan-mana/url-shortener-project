@@ -7,18 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>URL Shortener</h1>
-        <p>Paste your long link below to shorten it.</p>
-        <div class="input-group">
-            <input type="text" id="longUrl" placeholder="https://example.com/very-long-link">
-            <button onclick="shortenUrl()">Shorten</button>
-        </div>
-        <div id="result" class="result-box" style="display: none;">
-            <p>Your Short Link:</p>
-            <a href="#" id="shortLink" target="_blank"></a>
-        </div>
+
+<div class="container">
+
+    <h1>URL Shortener</h1>
+    <p>Paste your long link below to generate multiple short links.</p>
+
+    <div class="input-group">
+        <input type="text" id="longUrl" placeholder="https://example.com/very-long-link">
+        <button onclick="shortenUrl()">Shorten</button>
     </div>
-    <script src="script.js"></script>
+
+    <div id="result" class="result-box" style="display:none;">
+        <p>Generated Short Links:</p>
+
+        <ul id="shortLinksList"></ul>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
