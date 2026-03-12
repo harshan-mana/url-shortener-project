@@ -1,41 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickLink | URL Shortener</title>
+    <title>URL Shortener - Version 1</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-<div class="container">
-
-    <h1>URL Shortener</h1>
-    <p>Paste your long link below to generate multiple short links.</p>
-
-    <div class="input-group">
-        <input 
-            type="url"
-            id="longUrl"
-            placeholder="https://example.com/very-long-link"
-            required
-        >
-
-        <button onclick="shortenUrl()">Shorten</button>
+    <div class="container">
+        <h1>Multi-Link Shortener</h1>
+        <div class="input-group">
+            <input type="text" id="longUrl" placeholder="Paste long URL here">
+            <button onclick="shortenMultiple()">Generate Links</button>
+        </div>
+        <div id="results-container"></div>
     </div>
-
-    <div id="result" class="result-box" style="display:none;">
-        <p>Generated Short Links:</p>
-
-        <ul id="shortLinksList"></ul>
-
-    </div>
-
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
