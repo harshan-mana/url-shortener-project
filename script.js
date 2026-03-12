@@ -1,55 +1,29 @@
-async function shortenUrl() {
+async function shortenMultiple() {
+    const longUrl = document.getElementById('longUrl').value;
+    const container = document.getElementById('results-container');
+    if (!longUrl) return;
 
-    const longUrl = document.getElementById("longUrl").value;
-    const resultBox = document.getElementById("result");
-    const list = document.getElementById("shortLinksList");
+    const apis = [
+        `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`,
+        `https://is.gd/create.php?format=simple&url=${encodeURIComponent(longUrl)}`,
+        `https://v.gd/create.php?format=simple&url=${encodeURIComponent(longUrl)}`
+    ];
 
-    if (!longUrl) {
-        alert("Please paste a URL first!");
-        return;
-    }
+    const results = await Promise.all(apis.map(api => fetch(api).then(res => res.text())));
 
-    list.innerHTML = "<li>Generating links...</li>";
-    resultBox.style.display = "block";
-
-    try {
-
-        list.innerHTML = "";
-
-        const numberOfLinks = 3;   // number of shortened URLs
-
-        for (let i = 0; i < numberOfLinks; i++) {
-
-            const response = await fetch(
-                `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`
-            );
-
-            if (response.ok) {
-
-                const shortUrl = await response.text();
-
-                const li = document.createElement("li");
-
-                const a = document.createElement("a");
-
-                a.href = shortUrl;
-                a.innerText = shortUrl;
-                a.target = "_blank";
-
-                li.appendChild(a);
-                list.appendChild(li);
-
-            }
-
+    
+    let shortest = results[0];
+    results.forEach(link => {
+        if (link.length < shortest.length) {
+            shortest = link;
         }
+    });
 
-    } catch (error) {
-
-        console.error("Error:", error);
-        alert("Connection failed. Check your internet.");
-
-        resultBox.style.display = "none";
-
-    }
-
+    container.innerHTML = "";
+    results.forEach(link => {
+        const div = document.createElement('div')
+        div.className = `result-item ${link === shortest ? 'highlight' : ''}`;
+        div.innerText = link;
+        container.appendChild(div);
+    });
 }
