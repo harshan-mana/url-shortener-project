@@ -9,23 +9,19 @@ async function shortenMultiple() {
         return;
     }
 
-    // UI Loading State
     btn.innerText = "Processing...";
     btn.disabled = true;
-    container.innerHTML = `<div style="text-align:center; padding: 20px; color: #64748b;">Linking to global providers...</div>`;
+    container.innerHTML = `<div style="text-align:center; padding: 20px; color: #64748b;">Optimizing your links...</div>`;
 
     try {
-        // Fetch from TinyURL
         const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
         const baseLink = await response.text();
 
-        // Create variations (Simulating different provider lengths)
         const results = [
-            { id: 'standard', url: baseLink, label: 'Global Standard' },
-            { id: 'compact', url: baseLink.replace('tinyurl.com', 't.ly'), label: 'Compact Route' }
+            { id: 'standard', url: baseLink, label: 'Standard API' },
+            { id: 'compact', url: baseLink.replace('tinyurl.com', 't.ly'), label: 'High Compression' }
         ];
 
-        // Determine shortest
         const shortest = results.reduce((prev, curr) => 
             prev.url.length <= curr.url.length ? prev : curr
         );
@@ -39,15 +35,13 @@ async function shortenMultiple() {
             div.className = `result-item ${isShortest ? 'highlight' : ''}`;
             div.innerHTML = `
                 <div>
-                    <span style="display:block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 4px;">${item.label}</span>
+                    <span style="display:block; font-size: 11px; font-weight: bold; color: #94a3b8; margin-bottom: 4px;">${item.label}</span>
                     <span class="result-link">${item.url}</span>
                 </div>
-                <div style="font-size: 12px; color: #64748b;">Click to Visit →</div>
+                <div style="font-size: 12px; color: #2563eb; font-weight: bold;">Open Link →</div>
             `;
 
-            // FEATURE: Redirection on Click
             div.addEventListener('click', () => {
-                // We redirect to the original long URL as requested
                 window.open(longUrl, '_blank');
             });
 
@@ -55,7 +49,7 @@ async function shortenMultiple() {
         });
 
     } catch (error) {
-        container.innerHTML = "<p style='color:#ef4444; text-align:center;'>API Timeout. Please check your connection.</p>";
+        container.innerHTML = "<p style='color:#ef4444; text-align:center;'>Error generating links. Try again.</p>";
     } finally {
         btn.innerText = "Shorten Now";
         btn.disabled = false;
