@@ -2,17 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>URL Shortener - Version 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexLink | Enterprise URL Management</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Multi-Link Shortener</h1>
-        <div class="input-group">
-            <input type="text" id="longUrl" placeholder="Paste long URL here">
-            <button onclick="shortenMultiple()">Generate Links</button>
-        </div>
-        <div id="results-container"></div>
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <div class="logo">NexLink<span>.io</span></div>
+            <nav>
+                <div class="nav-item active">Dashboard</div>
+                <div class="nav-item">Analytics</div>
+                <div class="nav-item">Settings</div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h2>URL Optimizer</h2>
+                <div class="user-profile">JS</div>
+            </header>
+
+            <section class="generator-card">
+                <div class="card-header">
+                    <h3>Generate Multi-Provider Links</h3>
+                    <p>Enter your destination URL to generate optimized short links.</p>
+                </div>
+                
+                <div class="input-group">
+                    <input type="url" id="longUrl" placeholder="https://example.com/very-long-query-string" required>
+                    <button onclick="shortenMultiple()" id="generateBtn">Generate Links</button>
+                </div>
+
+                <div id="results-container" class="results-grid">
+                    </div>
+            </section>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>
