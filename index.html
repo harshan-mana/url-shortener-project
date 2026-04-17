@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexLink | Enterprise URL Management</title>
+    <title>NexLink | Instant Shortener</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -12,27 +12,25 @@
         <aside class="sidebar">
             <div class="logo">NexLink<span>.io</span></div>
             <nav>
-                <div class="nav-item active">Dashboard</div>
-                <div class="nav-item">Analytics</div>
-                <div class="nav-item">Settings</div>
+                <div class="nav-item active">Link Generator</div>
             </nav>
         </aside>
 
         <main class="main-content">
             <header class="top-bar">
-                <h2>URL Optimizer</h2>
-                <div class="user-profile">JS</div>
+                <h2>Quick Redirect Engine</h2>
+                <div class="status-indicator">● System Online</div>
             </header>
 
             <section class="generator-card">
                 <div class="card-header">
-                    <h3>Generate Multi-Provider Links</h3>
-                    <p>Enter your destination URL to generate optimized short links.</p>
+                    <h3>Input Destination</h3>
+                    <p>Generated links below are active. Clicking them will open your destination in a new tab.</p>
                 </div>
                 
                 <div class="input-group">
-                    <input type="url" id="longUrl" placeholder="https://example.com/very-long-query-string" required>
-                    <button onclick="shortenMultiple()" id="generateBtn">Generate Links</button>
+                    <input type="url" id="longUrl" placeholder="https://example.com/long-link-here" required>
+                    <button onclick="shortenMultiple()" id="generateBtn">Shorten Now</button>
                 </div>
 
                 <div id="results-container" class="results-grid">
