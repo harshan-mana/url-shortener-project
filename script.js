@@ -1,64 +1,63 @@
 async function shortenMultiple() {
-    const longUrl = document.getElementById('longUrl').value;
+    const longUrlInput = document.getElementById('longUrl');
+    const longUrl = longUrlInput.value.trim();
     const container = document.getElementById('results-container');
     const btn = document.getElementById('generateBtn');
     
     if (!longUrl) {
-        alert("Please enter a valid URL.");
+        alert("Please paste a destination URL first.");
         return;
     }
 
-    // UI Feedback
-    btn.innerText = "Generating...";
+    // UI Loading State
+    btn.innerText = "Processing...";
     btn.disabled = true;
-    container.innerHTML = `<div class="loading">Fetching secure links...</div>`;
+    container.innerHTML = `<div style="text-align:center; padding: 20px; color: #64748b;">Linking to global providers...</div>`;
 
     try {
+        // Fetch from TinyURL
         const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
         const baseLink = await response.text();
 
-        // Simulated results for different providers/lengths
+        // Create variations (Simulating different provider lengths)
         const results = [
-            { provider: 'TinyURL', url: baseLink },
-            { provider: 'Bitly-Sim', url: baseLink + "?s=1" },
-            { provider: 'Rebrandly-Sim', url: baseLink.replace('tinyurl.com', 't.ly') }
+            { id: 'standard', url: baseLink, label: 'Global Standard' },
+            { id: 'compact', url: baseLink.replace('tinyurl.com', 't.ly'), label: 'Compact Route' }
         ];
 
-        // Find shortest
-        const shortestUrl = results.reduce((prev, curr) => 
+        // Determine shortest
+        const shortest = results.reduce((prev, curr) => 
             prev.url.length <= curr.url.length ? prev : curr
-        ).url;
+        );
 
         container.innerHTML = ""; 
 
         results.forEach(item => {
-            const isShortest = item.url === shortestUrl;
+            const isShortest = item.url === shortest.url;
             const div = document.createElement('div');
-            div.className = `result-item ${isShortest ? 'highlight' : ''}`;
             
+            div.className = `result-item ${isShortest ? 'highlight' : ''}`;
             div.innerHTML = `
                 <div>
-                    <small style="display:block; color:#64748b">${item.provider}</small>
+                    <span style="display:block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 4px;">${item.label}</span>
                     <span class="result-link">${item.url}</span>
                 </div>
-                <span class="copy-hint">Click to copy</span>
+                <div style="font-size: 12px; color: #64748b;">Click to Visit →</div>
             `;
 
-            // Add click-to-copy functionality
-            div.onclick = () => {
-                navigator.clipboard.writeText(item.url);
-                const hint = div.querySelector('.copy-hint');
-                hint.innerText = "Copied!";
-                setTimeout(() => hint.innerText = "Click to copy", 2000);
-            };
+            // FEATURE: Redirection on Click
+            div.addEventListener('click', () => {
+                // We redirect to the original long URL as requested
+                window.open(longUrl, '_blank');
+            });
 
             container.appendChild(div);
         });
 
     } catch (error) {
-        container.innerHTML = "<p style='color:red'>Failed to connect to API providers.</p>";
+        container.innerHTML = "<p style='color:#ef4444; text-align:center;'>API Timeout. Please check your connection.</p>";
     } finally {
-        btn.innerText = "Generate Links";
+        btn.innerText = "Shorten Now";
         btn.disabled = false;
     }
 }
