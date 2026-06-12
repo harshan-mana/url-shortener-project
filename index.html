@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexLink | Instant Shortener</title>
+    <title>NexLink | Instant Shortener & Previewer</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
     <div class="app-wrapper">
@@ -18,22 +19,40 @@
 
         <main class="main-content">
             <header class="top-bar">
-                <h2>Quick Redirect Engine</h2>
+                <h2>Quick Redirect & Preview Engine</h2>
                 <div class="status-indicator">● System Online</div>
             </header>
 
             <section class="generator-card">
                 <div class="card-header">
-                    <h3>URL Shortener</h3>
+                    <h3>URL Shortener Settings</h3>
                 </div>
                 
-                <div class="input-group">
-                    <input type="url" id="longUrl" placeholder="Paste your long link here..." required>
-                    <button onclick="shortenMultiple()" id="generateBtn">Shorten Now</button>
+                <div class="input-container">
+                    <input type="url" id="longUrl" placeholder="Paste your destination link here (e.g., https://google.com)..." required>
+                    
+                    <div class="control-row">
+                        <div class="control-group">
+                            <label for="linkCount">Quantity</label>
+                            <input type="number" id="linkCount" min="1" max="5" value="2">
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="linkExpiry">Expiration Lifespan</label>
+                            <select id="linkExpiry">
+                                <option value="10000">10 Seconds (Testing)</option>
+                                <option value="60000">1 Minute</option>
+                                <option value="1800000">30 Minutes</option>
+                                <option value="3600000">1 Hour</option>
+                                <option value="86400000">24 Hours</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="generateConfiguredLinks()" id="generateBtn">Shorten Now</button>
                 </div>
 
-                <div id="results-container" class="results-grid">
-                    </div>
+                <div id="results-container" class="results-grid"></div>
             </section>
         </main>
     </div>
